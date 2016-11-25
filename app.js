@@ -60,6 +60,18 @@
 
 
     // Toggle layers on / off
+    var getOnOffLabel = function(vectorLayer) {
+        return vectorLayer.get('visible') == true ? 'Išjungti' : 'Įjungti';
+    }
+
+    var resetLabel = function(domElementId, vectorLayer) {
+        $('#' + domElementId).html(getOnOffLabel(vectorLayer));
+    }
+
+    resetLabel('ukiai-toggle-label', ukiaiVectorLayer);
+    resetLabel('plotai-toggle-label', plotaiVectorLayer);
+    resetLabel('keliai-toggle-label', keliaiVectorLayer);
+
     var toggleVectorLayerVisibility = function(vectorLayer) {
         var nextVisibility = !vectorLayer.get('visible');
         vectorLayer.set('visible', nextVisibility, false);
@@ -67,14 +79,17 @@
     
     $('#ukiai-toggle').click(function() {
         toggleVectorLayerVisibility(ukiaiVectorLayer);
+        resetLabel('ukiai-toggle-label', ukiaiVectorLayer);
     });
 
     $('#plotai-toggle').click(function() {
         toggleVectorLayerVisibility(plotaiVectorLayer);
+        resetLabel('plotai-toggle-label', plotaiVectorLayer);
     });
 
     $('#keliai-toggle').click(function() {
         toggleVectorLayerVisibility(keliaiVectorLayer);
+        resetLabel('keliai-toggle-label', keliaiVectorLayer);
     });
 
 
@@ -136,7 +151,10 @@
                 + weatherData.name
                 + ', vėjo greitis: ' 
                 + weatherData.wind.speed
-                + ', vėjo kryptis: ' + weatherData.wind.deg);
+                + ' m/s'
+                + ', vėjo kryptis: ' 
+                + weatherData.wind.deg 
+                + ' laipsniai.');
 
         $('#weather-info').html(weatherDataContent);
     };
