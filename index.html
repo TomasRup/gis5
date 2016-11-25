@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>GIS 5</title>
+
+        <!-- Open Layers dependencies -->
+        <script src="https://openlayers.org/en/v3.19.1/build/ol.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://openlayers.org/en/v3.19.1/css/ol.css" type="text/css">
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <!-- UIKit dependencies-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/uikit.min.js"></script>
+
+    </head>
+
+    <body>
+        <!-- Info tooltip -->
+        <div id="tooltip" style="display: none;" class="uk-badge uk-badge-danger">
+            <div id="tooltip-text">aa</div>
+        </div>
+
+        <!-- Content -->
+        <div class="uk-grid">
+
+            <div class="uk-width-1-4"></div>
+
+            <div class="uk-width-2-4">
+
+                <div class="uk-panel">
+                    
+                    <div class="uk-panel-badge uk-badge">Tomas Petras Rupšys</div>
+                    
+                    <h1 class="uk-panel-title">GIS 5 Atsiskaitymas</h1>
+                    
+                    <div id="map" style="position: relative;" class="map"></div>
+                    
+                    <nav class="uk-navbar">
+                        <ul class="uk-navbar-nav">
+                            <li>
+                                <a id="ukiai-toggle" class="uk-navbar-nav-subtitle">
+                                    Ukiai
+                                    <div>Įjungti / Išjungti</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="uk-navbar-nav">
+                            <li>
+                                <a id="plotai-toggle" class="uk-navbar-nav-subtitle">
+                                    Plotai
+                                    <div>Įjungti / Išjungti</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="uk-navbar-nav">
+                            <li>
+                                <a id="keliai-toggle" class="uk-navbar-nav-subtitle">
+                                    Keliai
+                                    <div>Įjungti / Išjungti</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="uk-navbar-nav">
+                            <li>
+                                <a id="keliai-toggle" class="uk-navbar-nav">
+                                    <form class="uk-form">
+                                        <input id="farm-filter" type="text" placeholder="Filtruoti ūkio savininką">
+                                    </form>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+
+            <div class="uk-width-1-4"></div>
+
+        </div>
+
+        <!-- Loading map app -->
+        <script src="app/data/keliai.data.js"></script>
+        <script src="app/data/plotai.data.js"></script>
+        <script src="app/data/ukiai.data.js"></script>
+        <script src="app/style.js"></script>
+        <script src="app.js"></script>
+
+    </body>
+</html>
