@@ -18,25 +18,26 @@
     </head>
 
     <body>
+
         <!-- Info tooltip -->
         <div id="tooltip" style="display: none;" class="uk-badge uk-badge-danger">
-            <div id="tooltip-text">aa</div>
+            <div id="tooltip-text"></div>
         </div>
 
         <!-- Content -->
-        <div class="uk-grid">
+        <div class="uk-grid" style="margin-top: 50px;">
 
-            <div class="uk-width-1-4"></div>
+            <div class="uk-width-2-10"></div>
 
-            <div class="uk-width-2-4">
+            <div class="uk-width-6-10">
 
                 <div class="uk-panel">
                     
                     <div class="uk-panel-badge uk-badge">Tomas Petras Rupšys</div>
                     
-                    <h1 class="uk-panel-title">GIS 5 Atsiskaitymas</h1>
+                    <h1 class="uk-panel-title">GIS 5 Atsiskaitymas - ekstra: <a href="http://openweathermap.org" target="_blank">openweathermap.org</a> integracija</h1>
                     
-                    <div id="map" style="position: relative;" class="map"></div>
+                    <div id="map" style="position: relative; cursor: pointer;" class="map"></div>
                     
                     <nav class="uk-navbar">
                         <ul class="uk-navbar-nav">
@@ -72,12 +73,19 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="uk-navbar-nav">
+                            <li style="margin-top: 10px; margin-left: 5px;">
+                                <div class="uk-badge uk-badge-danger">
+                                    <div id="weather-info">Vėjo informacija - laukiama taško</div>
+                                </div>
+                            </li>
+                        </ul>
                     </nav>
 
                 </div>
             </div>
 
-            <div class="uk-width-1-4"></div>
+            <div class="uk-width-2-10"></div>
 
         </div>
 

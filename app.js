@@ -16,6 +16,7 @@
         style: styleFunction
     });
 
+
     // Initializing 'Keliai' data layer
     var keliaiVector = new ol.source.Vector({
         features: (new ol.format.GeoJSON()).readFeatures(keliaiGeoJSON)
@@ -25,6 +26,7 @@
         source: keliaiVector,
         style: styleFunction
     });
+
 
     // Initializing 'Ukiai' data layer
     var ukiaiVector = new ol.source.Vector({
@@ -36,13 +38,16 @@
         style: styleFunction,
     });
 
+
+    var osmMapLayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+
     // Rendering the map
     var map = new ol.Map({
         target: 'map',
         layers: [
-            new ol.layer.Tile({
-                source: new ol.source.OSM()
-            }),
+            osmMapLayer,
             keliaiVectorLayer,
             ukiaiVectorLayer,
             plotaiVectorLayer,
@@ -72,13 +77,14 @@
         toggleVectorLayerVisibility(keliaiVectorLayer);
     });
 
-    // Information on points
-    var selectInteraction = new ol.interaction.Select({
+
+    // Information on farms
+    var farmPointSelectInteraction = new ol.interaction.Select({
         condition: ol.events.condition.pointerMove,
         layers: [ ukiaiVectorLayer ]
     });
 
-    selectInteraction.on('select', function(event) {
+    farmPointSelectInteraction.on('select', function(event) {
         if (event.selected.length > 0) {
             $('#tooltip').css({ 
                 display: 'table',
@@ -119,7 +125,38 @@
         }
     });
 
-    map.addInteraction(selectInteraction);
+    map.addInteraction(farmPointSelectInteraction);
+
+
+    // Weather information
+    var changeWeatherInfo = function(weatherData) {
+        
+        var weatherDataContent = (
+            'Stotelė: ' 
+                + weatherData.name
+                + ', vėjo greitis: ' 
+                + weatherData.wind.speed
+                + ', vėjo kryptis: ' + weatherData.wind.deg);
+
+        $('#weather-info').html(weatherDataContent);
+    };
+
+    map.on('click', function(event) {
+        
+        var lanlon = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');
+        var lat = lanlon[1];
+        var lon = lanlon[0];
+
+        var queryUrl = ('http://api.openweathermap.org/data/2.5/weather?lat=' 
+            + lat 
+            + '&lon=' 
+            + lon 
+            + '&APPID=a6ee1902733e549a9f3fed288d100222'); 
+
+        jQuery.get(queryUrl, function(response) {
+            changeWeatherInfo(response);
+        })
+    });
 
 
     // Filtering points
